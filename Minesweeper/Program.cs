@@ -38,15 +38,12 @@ namespace Minesweeper
                 {
                     for (int j = 0; j < board.GetLength(1); j++)
                     {
-                        //check if field is not a mine
+                        //check if field is a mine
                         if (boardsLines[i + 1 + offset][j] == '*')
                         {
                             board[i, j] = 9;
-                        }
-                        else
-                        {
-                            int mines = 0;
-                            //we count mines around
+
+                            //we add our mine to neighbour counters
                             for (int iNeighbour = i - 1; iNeighbour <= i + 1; iNeighbour++)
                             {
                                 for (int jNeighbour = j - 1; jNeighbour <= j + 1; jNeighbour++)
@@ -54,17 +51,11 @@ namespace Minesweeper
                                     //if we are still on board
                                     if (iNeighbour >= 0 && iNeighbour < board.GetLength(0) && jNeighbour >= 0 && jNeighbour < board.GetLength(1) && (iNeighbour != i || jNeighbour != j))
                                     {
-                                        //we check if there is a mine
-                                        if (boardsLines[iNeighbour + 1 + offset][jNeighbour] == '*')
-                                        {
-                                            mines++;
-                                        }
+                                        board[iNeighbour, jNeighbour]++;
                                     }
 
                                 }
                             }
-                            //we save the result for one field
-                            board[i, j] = mines;
                         }
                     }
                 }
@@ -81,7 +72,7 @@ namespace Minesweeper
             {
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    if (board[i, j] == 9)
+                    if (board[i, j] >= 9)
                     {
                         Console.Write('*');
                     }
