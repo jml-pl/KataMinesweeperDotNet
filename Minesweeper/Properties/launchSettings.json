@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Minesweeper": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\jlos\\Desktop\\minesweeper.txt"
+    }
+  }
+}
