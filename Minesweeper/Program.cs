@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Minesweeper
 {
-    class Program
+    public class Program
     {
         static int Main(string[] args)
         {
@@ -23,15 +23,27 @@ namespace Minesweeper
                     "..*..",
                     ".....");
                 */
+            GenerateBoard(boardsFile);
+            return 0;
+        }
+
+        public static void GenerateBoard(string boards)
+        {
             int offset = 0;
             int boardNo = 1;
-           
-            string[] boardsLines = boardsFile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            string[] boardsLines = boards.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             while (offset < boardsLines.Length)
             {
-                Console.WriteLine("Field #{0}:",boardNo);
-
-                int[,] board = new int[Int32.Parse(boardsLines[0+offset][0].ToString()), Int32.Parse(boardsLines[0 + offset][2].ToString())];
+                int[,] board = new int[Int32.Parse(boardsLines[0 + offset][0].ToString()), Int32.Parse(boardsLines[0 + offset][2].ToString())];
+                if (board.GetLength(0) > 0) {
+                    if (offset > 0)
+                    {
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine("Field #{0}:", boardNo);
+                }
+                
 
                 //for each field
                 for (int i = 0; i < board.GetLength(0); i++)
@@ -63,7 +75,7 @@ namespace Minesweeper
                 offset += board.GetLength(0) + 1;
                 boardNo++;
             }
-            return 0;
+
         }
 
         static void PrintBoard(int[,] board)
